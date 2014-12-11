@@ -14,6 +14,7 @@ Memory.counts.enemies = _.size(Game.getRoom("1-1").find(Game.HOSTILE_CREEPS));
 Memory.counts.guards = _.size(_.filter(Game.creeps, {memory: {role: 'guard'}}));
 Memory.counts.tier1 = _.size(_.filter(Game.creeps, {memory: {tier: 1}}));
 Memory.counts.tier2 = _.size(_.filter(Game.creeps, {memory: {tier: 2}}));
+Memory.counts.tier3 = _.size(_.filter(Game.creeps, {memory: {tier: 3}}));
 Memory.counts.healers = _.size(_.filter(Game.creeps, {memory: {role: 'healer'}}));
 Memory.counts.harvesters = _.size(_.filter(Game.creeps, {memory: {role: 'harvester'}}));
 Memory.counts.miners = _.size(_.filter(Game.creeps, {memory: {role: 'miner'}}));
@@ -22,6 +23,7 @@ Memory.counts.suppliers = _.size(_.filter(Game.creeps, {memory: {role: 'transpor
 Memory.counts.transporters = _.size(_.filter(Game.creeps, {memory: {role: 'transporter'}}));
 Memory.counts.range_guards = _.size(_.filter(Game.creeps, {memory: {role: 'guard', "tier": 1, "type": "range"}}));
 Memory.counts.dying_harvesters = _.size(_.filter(Game.creeps, function(c){return c.memory.role == 'harvester' && c.ticksToLive < 50;}));
+Memory.counts.dying_creeps = _.size(_.filter(Game.creeps, function(c){return _.contains(['miner', 'transporter'], c.memory.role) && c.ticksToLive < 50;}));
 
 Memory.exit = 0;
 
@@ -76,3 +78,5 @@ require('buildorder')(tier);
 for(var name in Game.creeps) {
     require(Game.creeps[name].memory.role)(Game.creeps[name])
 }
+
+// console.log("Version:", "2.1")

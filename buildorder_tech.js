@@ -37,6 +37,22 @@ module.exports = function (tier) {
         };
         return;
     }
+    if(tier == 3 && Memory.counts.tier3 >= settings.TIER3_CREEPS && Memory.counts.builders < tier && Memory.counts.dying_creeps < 2){
+        Memory.sources.count = tier + 2;
+        var types = _.pluck(initRoom.lookAt(Spawn1.pos.x, Spawn1.pos.y + 2), "type");
+        if(!_.contains(types, "extension") && !_.contains(types, "constructionSite")){
+            initRoom.createConstructionSite(Spawn1.pos.x, Spawn1.pos.y + 2, Game.STRUCTURE_EXTENSION);
+        }
+        
+        Memory.spawn_order = {
+            "body": settings["BUILDER_BODY"+tier],
+            "memory": {
+                "role": "builder",
+                "tier": tier,
+            }
+        };
+        return;
+    }
     var miners = initRoom.find(Game.MY_CREEPS, {filter: function(c){ return c.memory.role == "miner" && !!c.memory.source}});
     if(_.size(miners)){
         var tc = miners.reduce(function(s, m){

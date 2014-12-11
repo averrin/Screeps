@@ -12,7 +12,7 @@ module.exports = function (creep) {
     }
     var healer = creep.pos.findNearest(Game.MY_CREEPS, {
         filter: function(object) {
-            return creep.memory.role == "healer";
+            return object.memory.role == "healer";
         }
     });
     var status = creep.memory.status;
@@ -22,11 +22,25 @@ module.exports = function (creep) {
     if(ah && !targets.length && status != "init") creep.memory.status = "relax";
     if(ah && targets.length) creep.memory.status = "to_fight";
     
+    var nb = creep.pos.findInRange(Game.MY_CREEPS, 1, {
+        filter: function(object) {
+            return object.hits < object.hitsMax;
+        }
+    })
+    if(creep.hits < creep.hitsMax){
+        if(creep.getActiveBodyparts(Game.HEAL) > 0){
+            console.log(creep.heal(creep))
+        }
+    }
     
     if(status == "broken"){
         var ne = creep.pos.findNearest(Game.HOSTILE_CREEPS);
         if(!!ne && creep.pos.inRangeTo(ne, settings.HEALER_RANGE)){
-            retreat(creep, ne);
+            if(creep.memory.type == "range"){
+                retreat(creep, ne);
+                creep.rangedAttack(ne);
+                return;
+            }
             return;
         }else{
             if(!!healer){

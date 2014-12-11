@@ -10,7 +10,7 @@ module.exports = function(creep){
         return;
     }
     var builders = _.filter(Game.creeps, function(b){
-        return b.memory.role == "builder" && b.energy < b.energyCapacity;
+        return b.memory.role == "builder" && b.energy < b.energyCapacity && b.memory.status == "building";
     })
     var e = _.filter(creep.room.find(Game.MY_STRUCTURES), function(s){
         return s.structureType == Game.STRUCTURE_EXTENSION && s.energy < s.energyCapacity;
@@ -42,7 +42,10 @@ module.exports = function(creep){
     }
         
     var miner = Game.getObjectById(creep.memory.miner);
-    if(!miner){
+    var tfm = _.filter(Game.creeps, function(c){
+        return c.memory.miner == creep.memory.miner
+    }).length;
+    if(!miner || tfm > miner.memory.transport_count){
          creep.memory.miner = require("lone_miners")(creep.room);
     }
     if(creep.energy < creep.energyCapacity) {
