@@ -7,10 +7,15 @@ module.exports = {
     ROADS:              false,
     MAX_SOURCES:        2,
     HEALER_RANGE:       4,
-    TIER1_CREEPS:       12,
-    TIER2_CREEPS:       12,
+    TIER1_CREEPS:       8,
+    TIER2_CREEPS:       8,
     TIER3_CREEPS:       12,
     GUARD_RANGE_TIER1:  12,
+
+    MAGIC: {
+        SOURCE_COUNT_MULT: 1.5,
+        SOURCE_PATH_WEIGHT: 16,
+    },
 
     BODY: {
     

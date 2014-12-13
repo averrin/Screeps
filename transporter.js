@@ -8,9 +8,8 @@ module.exports = function() {
 
     transporter.main = function(creep) {
 
-        if(creep.energy && creep.energy < 0){
-            creep.dropEnergy()
-            return;
+        if(!creep.energy){
+            creep.memory.status = "empty";
         }
 
         var look = creep.room.lookAt(creep);
@@ -25,15 +24,15 @@ module.exports = function() {
         // console.log(1, creep)
         if(transporter.in_fear(creep)) return;
         // console.log(2, creep)
-        if(transporter.to_empty(creep)) return;
+        //if(transporter.to_empty(creep)) return;
         // console.log(3, creep)
         if(transporter.supply(creep)) return;
         // console.log(4, creep)
         if(transporter.harvest(creep)) return;
         // console.log(5, creep)
+        if(transporter.charge_ext(creep)) return;
         if(transporter.charge_builder(creep)) return;
         // console.log(6, creep)
-        if(transporter.charge_ext(creep)) return;
         // console.log(7, creep)
         if(transporter.charge_spawn(creep)) return;
 
@@ -42,15 +41,15 @@ module.exports = function() {
     
 
     transporter.harvest = function(creep) {            
-        var miner = Game.getObjectById(creep.memory.miner);
-        var tfm = _.filter(Game.creeps, function(c){
-            return c.memory.miner == creep.memory.miner
-        }).length;
-        if(!miner || tfm > miner.memory.transport_count){
-            creep.memory.miner = require("lone_miners")(creep.room);
-            miner = Game.getObjectById(creep.memory.miner);
-        }
-        if(!miner) return false;
+        // var miner = Game.getObjectById(creep.memory.miner);
+        // var tfm = _.filter(Game.creeps, function(c){
+        //     return c.memory.miner == creep.memory.miner
+        // }).length;
+        // if(!miner || tfm > miner.memory.transport_count){
+        //     creep.memory.miner = require("lone_miners")(creep.room);
+        //     miner = Game.getObjectById(creep.memory.miner);
+        // }
+        // if(!miner) return false;
 
         if(creep.energy < creep.energyCapacity) {
             // var mn = miner.pos.isNearTo(Game.DROPPED_ENERGY, {filter: function(e){
@@ -77,11 +76,13 @@ module.exports = function() {
                     if(target.length){
                         creep.memory.target = target[0].id;
                         creep.moveTo(target[0]);
+                        creep.memory.status = "empty";
                         return true;
                     }
                 }else{
                     // console.log(4.2, creep)
                     creep.moveTo(Game.getObjectById(creep.memory.target));
+                    creep.memory.status = "empty";
                     return true;
                 }
             // }
@@ -96,6 +97,7 @@ module.exports = function() {
 
         if(target.length && creep.energy < creep.energyCapacity){
             creep.moveTo(target[0]);
+            creep.memory.status = "empty";
             if(creep.pos.isNearTo(target[0])){
                 creep.pickup(target[0]);
                 creep.memory.target = null;
@@ -151,11 +153,12 @@ module.exports = function() {
             return 0 - c.memory.tier;
         })
 
-        if(b.length > 0 && creep.energy) {
-            if(Memory.counts.suppliers < Memory.counts.builders){
+        if(b.length > 0 && creep.energy > 1) {
+            if(Memory.counts.suppliers < Memory.counts.builders + 1){
                 creep.memory.status = "supply";
                 creep.transferEnergy(b[0])
             }else{
+                creep.memory.status = "empty";
                 creep.moveTo(Game.spawns.Spawn1);
                 creep.transferEnergy(Game.spawns.Spawn1)
             }

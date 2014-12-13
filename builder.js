@@ -23,7 +23,7 @@ module.exports = function () {
         var wh = creep.getActiveBodyparts(Game.WORK) > 0;
         var cs = creep.pos.findNearest(Game.CONSTRUCTION_SITES, { filter: function(c){return c.progress > 0}});
         if(!cs) cs = creep.pos.findNearest(Game.MY_STRUCTURES, {filter: function(s){
-            return s.hits < s.hitsMax;
+            return s.hitsMax - s.hits > 100;
         }});
         if(!cs) cs = creep.pos.findNearest(Game.CONSTRUCTION_SITES);
         if(!cs){

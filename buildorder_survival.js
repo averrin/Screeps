@@ -1,4 +1,4 @@
-module.exports = function (tier) {
+module.exports = function (tier, spawn) {
 
     var settings = require('settings');
     var _ = require('lodash');
@@ -12,18 +12,18 @@ module.exports = function (tier) {
     }
     
     if(guards < settings.INIT_GUARDIANS){
-        Memory.spawn_order = {"body": settings.BODY.GUARD_MELEE[tier], "memory": {"role": "guard", "tier": tier, "type": "melee", "status": "init"}};
+        spawn.memory.spawn_order = {"body": settings.BODY.GUARD_MELEE[tier], "memory": {"role": "guard", "tier": tier, "type": "melee", "status": "init"}};
         return;
     }
 
     // if(Game.spawns.Spawn1.energy < settings.HEALER_PRICE) return;
     if(healers < guards / 5){
-        Memory.spawn_order = {"body": settings.BODY.HEALER[tier], "memory": {"role": "healer", "tier": tier}};
+        spawn.memory.spawn_order = {"body": settings.BODY.HEALER[tier], "memory": {"role": "healer", "tier": tier}};
         return;
     }
     
     // if(Memory.counts.range_guards < settings.GUARD_RANGE_TIER1){
-        Memory.spawn_order = {"body": settings.BODY.GUARD_RANGE[tier], "memory": {"role": "guard", "tier": tier, "type": "range", "status": "init"}};
+        spawn.memory.spawn_order = {"body": settings.BODY.GUARD_RANGE[tier], "memory": {"role": "guard", "tier": tier, "type": "range", "status": "init"}};
         return
     // }
     return

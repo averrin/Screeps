@@ -22,10 +22,12 @@ module.exports = function () {
 
         if(!targets.length){
             if(!creep.memory.x || _.min(_.map(exits, function(e){
-                return e.pos.findPathTo(creep.memory.x, creep.memory.y).length;
-            })) > 20){
-            creep.memory.x = Math.floor(Math.random()*30) + 10;
-            creep.memory.y = Math.floor(Math.random()*30) + 10;
+                return e.pos.findPathTo(creep.memory.x, creep.memory.y, {ignoreCreeps: true}).length;
+            })) > 20 || _.min(_.map(creep.room.find(Game.SOURCES), function(e){
+                return e.pos.findPathTo(creep.memory.x, creep.memory.y, {ignoreCreeps: true}).length;
+            })) < 3){
+            creep.memory.x = Math.floor(Math.random()*40) + 5;
+            creep.memory.y = Math.floor(Math.random()*40) + 5;
         }}
 
         if(creep.memory.type != "range"){
@@ -89,7 +91,7 @@ module.exports = function () {
         if(status == "to_fight" ) {
             creep.memory.x = null;
             var nc = creep.pos.findNearest(Game.HOSTILE_CREEPS);
-                if(!!nc && creep.pos.inRangeTo(nc, 2)){
+                if(!!nc && creep.pos.inRangeTo(nc, 3)){ //TODO: test it with 3
                     if(creep.memory.type == "range"){
                         retreat(creep, nc);
                         creep.rangedAttack(nc);
