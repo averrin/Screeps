@@ -76,7 +76,8 @@ require('buildorder')(tier);
 // }
 
 for(var name in Game.creeps) {
-    require(Game.creeps[name].memory.role)(Game.creeps[name])
+	var role = Game.creeps[name].memory.role;
+	require(role)().main(Game.creeps[name]);
 }
 
 // console.log("Version:", "2.1")
