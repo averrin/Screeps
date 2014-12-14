@@ -49,32 +49,6 @@ if(_.size(Game.spawns) && !Memory.inited){
 }
 require('buildorder')(tier);
 
-// if(!(Game.time % 100)){
-
-//     var exits_d = [Game.EXIT_TOP, Game.EXIT_LEFT, Game.EXIT_BOTTOM, Game.EXIT_RIGHT];
-//     var exits = [];
-//     var d;
-//     _.forEach(exits_d, function(d){
-//         d = initRoom.find(d);
-//         if(d.length){
-//             exits.push(d[2])
-//         }
-//     })
-    
-//     var x = exits[Memory.exit].pos.x;
-//     if(x == 0) x = x + 10;
-//     if(x == 49) x = x - 10;
-//     var y = exits[Memory.exit].pos.y;
-//     if(y == 0) y = y + 10;
-//     if(y == 49) y = y - 10;
-//     Memory.flag.x = x;
-//     Memory.flag.y = y;
-//     Memory.exit = Memory.exit + 1
-//     if(Memory.exit == exits.length){
-//         // Memory.exit = 0;
-//     }
-// }
-
 for(var name in Game.creeps) {
 	var role = Game.creeps[name].memory.role;
 	require(role)().main(Game.creeps[name]);

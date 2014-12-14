@@ -11,20 +11,16 @@ module.exports = function (tier, spawn) {
         tier = tier -1;
     }
     
-    if(guards < settings.INIT_GUARDIANS){
+    if(guards < settings.INIT_GUARDIANS && tier == 1){
         spawn.memory.spawn_order = {"body": settings.BODY.GUARD_MELEE[tier], "memory": {"role": "guard", "tier": tier, "type": "melee", "status": "init"}};
         return;
     }
 
-    // if(Game.spawns.Spawn1.energy < settings.HEALER_PRICE) return;
     if(healers < guards / 5){
         spawn.memory.spawn_order = {"body": settings.BODY.HEALER[tier], "memory": {"role": "healer", "tier": tier}};
         return;
     }
     
-    // if(Memory.counts.range_guards < settings.GUARD_RANGE_TIER1){
-        spawn.memory.spawn_order = {"body": settings.BODY.GUARD_RANGE[tier], "memory": {"role": "guard", "tier": tier, "type": "range", "status": "init"}};
-        return
-    // }
+    spawn.memory.spawn_order = {"body": settings.BODY.GUARD_RANGE[tier], "memory": {"role": "guard", "tier": tier, "type": "range", "status": "init"}};
     return
 }

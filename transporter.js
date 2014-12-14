@@ -41,27 +41,9 @@ module.exports = function() {
     
 
     transporter.harvest = function(creep) {            
-        // var miner = Game.getObjectById(creep.memory.miner);
-        // var tfm = _.filter(Game.creeps, function(c){
-        //     return c.memory.miner == creep.memory.miner
-        // }).length;
-        // if(!miner || tfm > miner.memory.transport_count){
-        //     creep.memory.miner = require("lone_miners")(creep.room);
-        //     miner = Game.getObjectById(creep.memory.miner);
-        // }
-        // if(!miner) return false;
 
         if(creep.energy < creep.energyCapacity) {
-            // var mn = miner.pos.isNearTo(Game.DROPPED_ENERGY, {filter: function(e){
-            //     return e.energy >= creep.energyCapacity;
-            // }});
-            // if(!!miner && mn){
-            //     if(!creep.pos.isNearTo(miner)){
-            //         creep.memory.status = "empty";
-            //         creep.moveTo(miner);
-            //         return true;
-            //     }
-            // }else{
+
                 if(!Game.getObjectById(creep.memory.target)){
                     // console.log(4.1, creep)
                     var target = _.sortBy(creep.room.find(Game.DROPPED_ENERGY), function(s){
@@ -85,7 +67,6 @@ module.exports = function() {
                     creep.memory.status = "empty";
                     return true;
                 }
-            // }
         }
         return false;
     }

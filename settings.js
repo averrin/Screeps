@@ -5,12 +5,12 @@ module.exports = {
     INIT_HARVESTERS:    3,
     INIT_GUARDIANS:     2,
     ROADS:              false,
-    MAX_SOURCES:        2,
+    MAX_SOURCES:        3,
     HEALER_RANGE:       4,
     TIER1_CREEPS:       8,
     TIER2_CREEPS:       8,
-    TIER3_CREEPS:       12,
-    GUARD_RANGE_TIER1:  12,
+    TIER3_CREEPS:       8,
+    GUARD_RANGE_TIER1:  6,
 
     MAGIC: {
         SOURCE_COUNT_MULT: 1.5,

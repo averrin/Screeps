@@ -9,26 +9,11 @@ module.exports = function () {
 
     guard.main = function(creep){
         var targets = creep.room.find(Game.HOSTILE_CREEPS);
-        var exits_d = [Game.EXIT_TOP, Game.EXIT_LEFT, Game.EXIT_BOTTOM, Game.EXIT_RIGHT];
-        var exits = [];
-        var d;
-        _.forEach(exits_d, function(d){
-            d = creep.room.find(d);
-            if(d.length){
-                exits.push(d[2]);
-            }
-        })
         var ah;
 
         if(!targets.length){
-            if(!creep.memory.x || _.min(_.map(exits, function(e){
-                return e.pos.findPathTo(creep.memory.x, creep.memory.y, {ignoreCreeps: true}).length;
-            })) > 20 || _.min(_.map(creep.room.find(Game.SOURCES), function(e){
-                return e.pos.findPathTo(creep.memory.x, creep.memory.y, {ignoreCreeps: true}).length;
-            })) < 3){
-            creep.memory.x = Math.floor(Math.random()*40) + 5;
-            creep.memory.y = Math.floor(Math.random()*40) + 5;
-        }}
+            guard.set_position(creep);
+        }
 
         if(creep.memory.type != "range"){
             ah = creep.getActiveBodyparts(Game.ATTACK) > 0;
@@ -118,6 +103,26 @@ module.exports = function () {
                     creep.attack(target);
                 }
             }
+        }
+    }
+
+    guard.set_position = function(creep){
+        var exits_d = [Game.EXIT_TOP, Game.EXIT_LEFT, Game.EXIT_BOTTOM, Game.EXIT_RIGHT];
+        var exits = [];
+        var d;
+        _.forEach(exits_d, function(d){
+            d = creep.room.find(d);
+            if(d.length){
+                exits.push(d[2]);
+            }
+        })
+        if(!creep.memory.x || _.min(_.map(exits, function(e){
+            return e.pos.findPathTo(creep.memory.x, creep.memory.y, {ignoreCreeps: true}).length;
+        })) > 20 || _.min(_.map(creep.room.find(Game.SOURCES), function(e){
+            return e.pos.findPathTo(creep.memory.x, creep.memory.y, {ignoreCreeps: true}).length;
+        })) < 3){
+            creep.memory.x = Math.floor(Math.random()*40) + 5;
+            creep.memory.y = Math.floor(Math.random()*40) + 5;
         }
     }
 

@@ -55,7 +55,7 @@ module.exports = function (tier, spawn) {
             }
 
             if(Memory.counts.transporters < tc){
-                var miner = require("lone_miners")(initRoom);
+                // var miner = require("lone_miners")(initRoom);
                 
                 spawn.memory.spawn_order = {
                     "body": settings.BODY.TRANSPORTER[tier],
@@ -63,7 +63,7 @@ module.exports = function (tier, spawn) {
                         "role": "transporter",
                         "tier": tier,
                         "status": "transport",
-                        "miner": miner
+                        // "miner": miner
                     }
                 };
                 return;

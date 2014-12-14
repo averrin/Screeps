@@ -13,6 +13,7 @@ module.exports = function () {
         });
         if(!creep.getActiveBodyparts(Game.HEAL) && _.size(healers) == 1){
             creep.suicide();
+            return;
         }
         
         var ne = creep.pos.findNearest(Game.HOSTILE_CREEPS);
