@@ -22,10 +22,10 @@ module.exports = {
     BODY: {
     
         MINER:          ["",
-                        [Game.MOVE, Game.WORK, Game.WORK, Game.WORK, Game.WORK],
-                        [Game.MOVE, Game.WORK, Game.WORK, Game.WORK, Game.WORK, Game.WORK],
-                        [Game.MOVE, Game.WORK, Game.WORK, Game.WORK, Game.WORK, Game.WORK, Game.WORK],
-                        [Game.MOVE, Game.WORK, Game.WORK, Game.WORK, Game.WORK, Game.WORK, Game.WORK, Game.MOVE],
+                        [Game.MOVE, Game.WORK, Game.WORK, Game.WORK, Game.CARRY],
+                        [Game.MOVE, Game.WORK, Game.WORK, Game.WORK, Game.CARRY, Game.WORK],
+                        [Game.MOVE, Game.WORK, Game.WORK, Game.WORK, Game.CARRY, Game.WORK, Game.WORK],
+                        [Game.MOVE, Game.WORK, Game.WORK, Game.WORK, Game.CARRY, Game.WORK, Game.WORK, Game.MOVE],
         ],
         
         BUILDER:        ["",
