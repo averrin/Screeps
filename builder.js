@@ -9,7 +9,7 @@ module.exports = function () {
     builder.main = function(creep){
     
         var ne = creep.pos.findNearest(Game.HOSTILE_CREEPS);
-        if(!!ne && creep.pos.inRangeTo(ne, settings.HEALER_RANGE)){
+        if(!!ne && creep.pos.inRangeTo(ne, settings.HEALER_RANGE + 2)){
             creep.memory.status = "in_fear";
             retreat(creep, ne);
             return;
@@ -28,7 +28,11 @@ module.exports = function () {
         if(!cs) cs = creep.pos.findNearest(Game.CONSTRUCTION_SITES);
         if(!cs){
             creep.memory.status = "relax"
-            creep.moveTo(Memory.flag.x, Memory.flag.y);
+            if(Game.flags.Flag1){
+                    creep.moveTo(Game.flags.Flag1);
+                }else{
+                    creep.moveTo(Memory.flag.x, Memory.flag.y);
+                }
             return;
         }
         if(!creep.pos.isNearTo(cs)) creep.moveTo(cs);

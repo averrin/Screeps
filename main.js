@@ -54,4 +54,11 @@ for(var name in Game.creeps) {
 	require(role)().main(Game.creeps[name]);
 }
 
-// console.log("Version:", "2.1")
+if(initRoom.lookAt(8,5)[0].type == "source" && Memory.counts.builders >= 1 ){ //&& !Memory.walls_inited){
+	Memory.walls_inited = true;	
+	initRoom.createConstructionSite(23, 3, Game.STRUCTURE_WALL);
+	initRoom.createConstructionSite(25, 3, Game.STRUCTURE_WALL);
+	initRoom.createConstructionSite(27, 3, Game.STRUCTURE_WALL);
+}
+
+// console.log("Version:", "2.2")

@@ -3,7 +3,12 @@ module.exports = function (tier, spawn) {
     var _ = require('lodash');
     var initRoom = Game.getRoom("1-1");
     
-    if(!Memory.at_war){
+    // if(tier > 1 && (Memory.counts.guards < 8 || Memory.counts.miners < Memory.sources.count*settings.MAGIC.SOURCE_COUNT_MULT )){
+    //     tier = tier -1;
+    // }
+    
+    // if((!Memory.at_war && tier == 1) || (!Memory.at_war && Game.time % 200 > 50 && tier > 2)){
+        if(!Memory.at_war){
 
         if(initRoom.find(Game.CONSTRUCTION_SITES).length && !Memory.counts.builders){
             spawn.memory.spawn_order = {

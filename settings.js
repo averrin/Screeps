@@ -16,6 +16,7 @@ module.exports = {
         SOURCE_COUNT_MULT: 1.5,
         SOURCE_PATH_WEIGHT: 16,
         GUARD_DIST: 15,
+        SPAWN_HOSTILE_RANGE: 6,
     },
 
     BODY: {

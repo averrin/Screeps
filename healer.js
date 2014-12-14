@@ -40,8 +40,8 @@ module.exports = function () {
                 }});
                 creep.moveTo(target)
             }else{
-                if(Game.flags.length){
-                    creep.moveTo(Game.spawns.Spawn1);
+                if(Game.flags.Flag1){
+                    creep.moveTo(Game.flags.Flag1);
                 }else{
                     creep.moveTo(Memory.flag.x, Memory.flag.y);
                 }
