@@ -118,7 +118,7 @@ module.exports = function () {
         })
         if(!creep.memory.x || _.min(_.map(exits, function(e){
             return e.pos.findPathTo(creep.memory.x, creep.memory.y, {ignoreCreeps: true}).length;
-        })) > 20 || _.min(_.map(creep.room.find(Game.SOURCES), function(e){
+        })) > settings.MAGIC.GUARD_DIST || _.min(_.map(creep.room.find(Game.SOURCES), function(e){
             return e.pos.findPathTo(creep.memory.x, creep.memory.y, {ignoreCreeps: true}).length;
         })) < 3){
             creep.memory.x = Math.floor(Math.random()*40) + 5;

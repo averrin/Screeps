@@ -15,6 +15,7 @@ module.exports = {
     MAGIC: {
         SOURCE_COUNT_MULT: 1.5,
         SOURCE_PATH_WEIGHT: 16,
+        GUARD_DIST: 15,
     },
 
     BODY: {
@@ -49,9 +50,9 @@ module.exports = {
         
         GUARD_RANGE:    ["",
                         [Game.TOUGH, Game.MOVE,Game.MOVE,Game.MOVE, Game.RANGED_ATTACK],
-                        [Game.TOUGH, Game.MOVE,Game.MOVE,Game.MOVE, Game.RANGED_ATTACK,Game.RANGED_ATTACK],
-                        [Game.MOVE,  Game.MOVE,Game.MOVE,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.RANGED_ATTACK],
-                        [Game.MOVE,  Game.MOVE,Game.MOVE,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.RANGED_ATTACK, Game.RANGED_ATTACK],
+                        [Game.TOUGH, Game.MOVE,Game.MOVE,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.MOVE],
+                        [Game.MOVE,  Game.MOVE,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.RANGED_ATTACK, Game.MOVE],
+                        [Game.MOVE,  Game.MOVE,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.RANGED_ATTACK,Game.RANGED_ATTACK, Game.RANGED_ATTACK, Game.MOVE],
         ],
         
         HEALER:         ["",

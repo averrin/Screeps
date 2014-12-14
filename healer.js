@@ -24,7 +24,7 @@ module.exports = function () {
 
         var target = creep.pos.findNearest(Game.MY_CREEPS, {
             filter: function(c){
-                if(c.hits < c.hitsMax && c.id != creep.id){
+                if(c.hitsMax - c.hits > Game.HEAL_POWER && c.id != creep.id){
                     return c
                 }
             }
